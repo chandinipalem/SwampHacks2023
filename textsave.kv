@@ -1,0 +1,516 @@
+#: import MapView kivy_garden.mapview.MapView
+<MySwiper@MDSwiperItem>
+<MagicButton@MagicBehavior+MDIconButton>
+
+
+WindowManager:
+    Welcome:
+    Location:
+    ContactInfo:
+    Complete:
+
+
+<Welcome>:
+    canvas.before:
+        Color:
+            rgba: (212 / 255, 226 / 255, 235 / 255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    name:'welcome'
+    MDLabel:
+        pos_hint: {"center_y": 0.9, 'center_x': 0.5}
+        markup: True
+        text: "[b]Keep it Green[/b]"
+        halign: 'center'
+        text_color: 0, 0, 0, 0
+        font_style: 'H4'
+    MDLabel:
+        padding_x: 15
+        halign: 'center'
+        text: "Help clean up Florida cities!"
+        pos_hint: {"center_y": 0.8, 'center_x': 0.5}
+        theme_text_color: "Custom"
+        text_color: "green"
+        font_style: 'H6'
+    MDLabel:
+        padding_x: 15
+        halign: 'center'
+        text: "Enter a city to find clean up locations near you! "
+        halign: "center"
+        pos_hint: {"center_y": 0.725, 'center_x': 0.5}
+        theme_text_color: "Custom"
+        text_color: "green"
+        font_style: 'H6'
+    MDTextField:
+        id: city_input
+        hint_text: "City Name"
+        mode: "rectangle"
+        pos_hint: {"center_y": 0.6, 'center_x': 0.5}
+
+    MDRaisedButton:
+        id: enter
+        text: 'Enter'
+        md_bg_color: "green"
+        pos_hint: {'center_y': 0.5, 'center_x': 0.5}
+        on_release:
+            app.getMap()
+            root.manager.current = 'locations'
+            root.manager.transition.direction = "left"
+
+
+    Image:
+        source:'earth.png'
+        pos_hint: {'center_y': 0, 'center_x': 0.5}
+        size_hint_x: 1.35
+        allow_stretch: True
+
+<Location>
+    canvas.before:
+        Color:
+            rgba: (212 / 255, 226 / 255, 235 / 255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    name: 'locations'
+    Label:
+        text: 'Map goes here'
+        pos: (200, 400)
+    MDRaisedButton:
+        text: 'Back'
+        pos_hint:{'center_y':0.05, 'center_x': 0.1}
+        md_bg_color: "green"
+        on_press:
+            app.reset()
+            root.manager.current = 'welcome'
+            root.manager.transition.direction = "right"
+
+    MapView:
+        id: map
+        lat:
+        lon:
+        zoom: 10
+        double_tap_zoom: True
+        size_hint: 1, 1
+        pos_hint: {'y':0.35}
+        MapMarkerPopup:
+            id: marker0
+            lat:
+            lon:
+            pinColor: {'green'}
+        MapMarkerPopup:
+            id: marker1
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker2
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker3
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker4
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker5
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker6
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker7
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker8
+            lat:
+            lon:
+        MapMarkerPopup:
+            id: marker9
+            lat:
+            lon:
+
+    MDRaisedButton:
+        pos_hint:{'center_y': 0.05, 'center_x': 0.5}
+        text: 'Join'
+        height: 70
+        md_bg_color: "green"
+        on_press:
+            root.manager.current = 'contactinfo'
+            root.manager.transition.direction = "left"
+
+    MDChip:
+        id: person
+        text: "0 / 8"
+        icon: 'account-circle'
+        #icon_left: "avatar.png"
+        #line_color: app.theme_cls.disabled_hint_text_color
+        md_bg_color: "green"
+        elevation: 4
+        radius: '12dp'
+        pos_hint:{'center_y': 0.05, 'center_x': 0.85}
+
+
+
+    MDScreen:
+        orientation: 'vertical'
+        MDTopAppBar:
+            id: toolbar
+            title: "Clean up Sites in "
+            halign: "center"
+            elevation: 4
+            pos_hint: {"top": 1}
+
+        MDSwiper:
+            id: clear
+            pos_hint:{'center_y': 0.25, 'center_x': 0.5}
+            size_hint_x: 1
+            size_hint_y: None
+            height: root.height - toolbar.height*6 - dp(40)
+            y: root.height - self.height - toolbar.height*6 - dp(20)
+            adaptive_height: True
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [15,]
+
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper1
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper1.business + swiper1.address + swiper1.info
+                            theme_text_color: "Custom"
+
+
+
+
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper2
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper2.business + swiper2.address + swiper2.info
+                            theme_text_color: "Custom"
+
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper3
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper3.business + swiper3.address + swiper3.info
+                            theme_text_color: "Custom"
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper4
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper4.business + swiper4.address + swiper4.info
+                            theme_text_color: "Custom"
+
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper5
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper5.business + swiper5.address + swiper5.info
+                            theme_text_color: "Custom"
+
+
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper6
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper6.business + swiper6.address + swiper6.info
+                            theme_text_color: "Custom"
+
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper7
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper7.business + swiper7.address + swiper7.info
+                            theme_text_color: "Custom"
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper8
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper8.business + swiper8.address + swiper8.info
+                            theme_text_color: "Custom"
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper9
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper9.business + swiper9.address + swiper9.info
+                            theme_text_color: "Custom"
+
+            MySwiper:
+                RelativeLayout:
+                    FitImage:
+                        source: "cardImage.jpg"
+                        radius: [20,]
+                    MDBoxLayout:
+                        MDLabel:
+                            padding_x: 20
+                            padding_y: 20
+                            adaptive_height: True
+                            id: swiper10
+                            markup: True
+                            business: "[color=#000000][b]"
+                            address: "\n[size=26][color=#bebebe]  "
+                            info: "[size=28]\n[color=#3f3f3f][i]"
+                            size_hint_y: None
+                            size_hint_x: 5
+                            height: self.texture_size[1]
+                            pos_hint: {"center_y": 0.45}
+                            text: swiper10.business + swiper10.address + swiper10.info
+                            theme_text_color: "Custom"
+
+
+
+<ContactInfo>:
+    canvas.before:
+        Color:
+            rgba: (212 / 255, 226 / 255, 235 / 255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    name:'contactinfo'
+    MDLabel:
+        markup: True
+        padding_x: 30
+        text: "[size=50]Thank you for your interest!\n[size=30]Please provide your contact info so we can let you know when your group is full and ready to participate in a clean up."
+        pos_hint: {"center_x": 0.5,"center_y": 0.75}
+        halign: 'center'
+        text_color: 0, 0, 0, 0
+        font_style: 'H5'
+    MDTextField:
+        padding_x: 30
+        size_hint_x: None
+        width: 500
+        id: name
+        hint_text: "Name"
+        mode: "rectangle"
+        pos_hint: {"center_y": 0.525, 'center_x': 0.5}
+    MDTextField:
+        padding_x: 30
+        size_hint_x: None
+        width: 500
+        id: email
+        hint_text: "Email"
+        mode: "rectangle"
+        pos_hint: {"center_y": 0.4, 'center_x': 0.5}
+    MDTextField:
+        padding_x: 30
+        size_hint_x: None
+        width: 500
+        id: phone
+        hint_text: "Phone Number"
+        mode: "rectangle"
+        pos_hint: {"center_y": 0.275, 'center_x': 0.5}
+    MDRaisedButton
+        pos_hint:{'center_y': 0.05, 'center_x': 0.5}
+        text: 'Submit Form'
+
+        height: 70
+        md_bg_color: "green"
+        on_press:
+            root.manager.current = 'complete'
+            root.manager.transition.direction = "left"
+    MDRaisedButton:
+        text: 'Back'
+        pos_hint:{'center_y':0.95, 'center_x': 0.1}
+        md_bg_color: "green"
+        on_press:
+            root.manager.current = 'locations'
+            root.manager.transition.direction = "right"
+
+
+<Complete>
+    canvas.before:
+        Color:
+            rgba: (212 / 255, 226 / 255, 235 / 255, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    name: 'complete'
+
+
+    MDLabel:
+        markup: True
+        padding_x: 30
+        text: "[size=50]Thank you for choosing to help out in your community!\n[size=30]You'll receive an email and text with all the information you'll need, including a date and time, as soon as a total of 8 people sign up for this location."
+        pos_hint: {"center_x": 0.5,"center_y": 0.75}
+        halign: 'center'
+        text_color: 0, 0, 0, 0
+        font_style: 'H5'
+    MDLabel:
+        markup: True
+        padding_x: 30
+        text: "[size=30]Would you like to volunteer at an additional location?"
+        pos_hint: {"center_x": 0.5,"center_y": 0.5}
+        halign: 'center'
+        text_color: 0, 0, 0, 0
+    MDRoundFlatIconButton:
+        pos_hint: {"center_x": 0.5,"center_y": 0.4}
+        size_hint_x: None
+        halign: 'center'
+        icon: "rotate-left"
+        text_color: 0, 0, 0, 1
+        text: "Make Another Submission!"
+        width: dp(250)
+        on_press:
+            app.reset()
+            root.manager.current = 'welcome'
+            root.manager.transition.direction = "left"
+
+
+    MDRoundFlatIconButton:
+        pos_hint: {"center_x": 0.5,"center_y": 0.3}
+        size_hint_x: None
+        halign: 'center'
+        icon: "thumb-up-outline"
+        text_color: 0, 0, 0, 1
+        text: "Exit!"
+        width: dp(250)
+        on_press:
+            app.exitCode()
