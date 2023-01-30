@@ -5,6 +5,8 @@ The app Keep It Green The app takes a user-input city name and parses an EPA dat
 
 The project was built entirely using Python on the PyCharm IDE. We used the Pandas, GeoPy, Kivy, and KivyMD libraries. 
 
+Demo Video: https://www.youtube.com/watch?v=LBrukxBMFlc
+
 In order to run the code, make sure to import the following into main.py: 
   - import pandas as pd
   - from geopy.geocoders import Nominatim
